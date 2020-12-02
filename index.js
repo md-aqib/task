@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
 
-require('./models/Student');
-require('./models/Subject');
+require('./models/index')
 
 mongoose.connect(keys.mongoURI, { useMongoClient: true })
   .then(() => console.log('Database connected successfully...'))
