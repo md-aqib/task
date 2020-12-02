@@ -1,9 +1,14 @@
 const DBstudent = require('../models/Student');
+const { studentValidation } = require('./validation')
 
 module.exports = async(req, res) => {
     try{
         if(req.body.name && req.body.email && req.body.phone && req.body.standard){
-            let studentData = await DBstudent.findOne({email: req.body.email})
+            //validation
+            const { error } = studentValidation(req.body);
+            if (error) return res.status(400).send(error.details[0].message);
+            
+            let studentData = await DBstudent.findOne({email: req.body.email});
             if(studentData || studentData !== null){
                 return res.json({
                     success: false,
