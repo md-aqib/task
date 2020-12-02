@@ -15,8 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-require('./routes/authRoutes')(app);
-require('./routes/blogRoutes')(app);
+app.use('/api', require('./routes/route'))
 
 app.use(morgan('dev', {
     skip: function (req, res) { return res.statusCode < 400 }
