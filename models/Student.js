@@ -13,7 +13,8 @@ const student = new Schema({
     },
     phone: {
         type: Number,
-        required: true
+        required: true,
+        min: 10
     },
     standard: {
         type: Number,

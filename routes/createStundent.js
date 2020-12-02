@@ -7,7 +7,7 @@ module.exports = async(req, res) => {
             //validation
             const { error } = studentValidation(req.body);
             if (error) return res.status(400).send(error.details[0].message);
-            
+
             let studentData = await DBstudent.findOne({email: req.body.email});
             if(studentData || studentData !== null){
                 return res.json({
@@ -33,6 +33,7 @@ module.exports = async(req, res) => {
             })
         }
     } catch(e){
+        console.log(e)
         return res.json({
             success: false,
             message: "Something went wrong, Please try again later."

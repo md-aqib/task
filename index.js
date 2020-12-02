@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
+const keys = require('./config/keys')
 
 require('./models/index')
 
@@ -20,7 +21,7 @@ app.use(morgan('dev', {
     skip: function (req, res) { return res.statusCode < 400 }
   }))
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Listening on port`, PORT);
 });
