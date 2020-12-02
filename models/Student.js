@@ -19,10 +19,11 @@ const student = new Schema({
         type: Number,
         enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
+    subject: [{ type: Schema.Types.ObjectId, ref: 'Subject' }],
     createdAt: {
         type: Date,
         default: Date.now()
     }
 })
 
-module.exports = mongoose.model('student', student)
+module.exports = mongoose.model('Student', student)
