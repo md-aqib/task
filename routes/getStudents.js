@@ -3,7 +3,7 @@ const DBstudent = require('../models/Student');
 module.exports = async(req, res) => {
     try{
         let studentData = await DBstudent.find({}).populate('subject','subject');
-        if(!studentData){
+        if(studentData.length === 0){
             return res.json({
                 success: false,
                 message: "No student found."
