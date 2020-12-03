@@ -1,9 +1,17 @@
 const DBstudent = require('../models/Student');
+const DBsubject = require('../models/Subject')
 
 module.exports = async(req, res) => {
     try{
         if(req.params.subjectId && req.query.email){
-            let studentData = await DBstudent.findOne({email: req.query.email})
+            let subjectData = await DBsubject.findById(req.params.subjectId);
+            if(!subjectData){
+                return res.json({
+                    success: false,
+                    message: "SUbject does not exists."
+                })
+            }
+            let studentData = await DBstudent.findOne({email: req.query.email});
             if(!studentData){
                 return res.json({
                     success: false,
@@ -13,12 +21,12 @@ module.exports = async(req, res) => {
             if(studentData.subject.includes(req.params.subjectId)){
                 return res.json({
                     success: false,
-                    message: "Subject already updated"
+                    message: "Subject already updated."
                 })
             }
             await DBstudent.findOneAndUpdate({email: req.query.email}, {$addToSet: {subject: req.params.subjectId}}, {
                 new: true
-              })
+              });
             return res.json({
                 success: true,
                 message: "Subject updated successfully."
